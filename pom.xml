@@ -9,16 +9,31 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <!-- 工具-->
+        <hutool.version>5.8.20</hutool.version>
+        <fastjson2.version>2.0.34</fastjson2.version>
+        <bytebuddy.version>1.14.4</bytebuddy.version>
+        <lombok.version>1.18.24</lombok.version>
+        <!-- 测试框架-->
         <assertj.version>3.4.1</assertj.version>
         <junit.version>4.12</junit.version>
         <jmockit.version>1.36</jmockit.version>
-        <hutool.version>5.8.20</hutool.version>
-        <fastjson2.version>2.0.34</fastjson2.version>
+        <powermock.version>2.0.9</powermock.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!-- 工具-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${bytebuddy.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
@@ -30,12 +45,6 @@
                 <version>${hutool.version}</version>
             </dependency>
             <!-- 测试框架-->
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
-                <scope>test</scope>
-            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -49,6 +58,26 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- powermock-->
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito2</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- jmockit-->
+            <dependency>
                 <groupId>org.jmockit</groupId>
                 <artifactId>jmockit</artifactId>
                 <version>${jmockit.version}</version>
@@ -59,6 +88,26 @@
 
     <dependencies>
         <!-- 工具-->
+        <!-- log4j-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2</artifactId>
@@ -81,6 +130,16 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -111,22 +170,33 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
-                    <argLine>-javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
+                    <!-- jmock配置-->
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+                    </argLine>
                     <useSystemClassLoader>true</useSystemClassLoader>
                 </configuration>
             </plugin>
+            <!-- powermock适配jdk17-->
 <!--            <plugin>-->
 <!--                <artifactId>maven-surefire-plugin</artifactId>-->
 <!--                <configuration>-->
-<!--                    <argLine>-javaagent:"${settings.localRepository}/org/jmockit/jmockit/1.36/jmockit-1.36.jar=coverage"</argLine>-->
-<!--                    <disableXmlReport>false</disableXmlReport>-->
-<!--                    <systemPropertyVariables>-->
-<!--                        <coverage-output>html</coverage-output>-->
-<!--                        <coverage-outputDir>${project.build.directory}/codecoverage-output</coverage-outputDir>-->
-<!--                        <coverage-metrics>all</coverage-metrics>-->
-<!--                    </systemPropertyVariables>-->
+<!--                    <argLine>&#45;&#45;add-opens java.base/java.lang=ALL-UNNAMED</argLine>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+
+            <!--            <plugin>-->
+            <!--                <artifactId>maven-surefire-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <argLine>-javaagent:"${settings.localRepository}/org/jmockit/jmockit/1.36/jmockit-1.36.jar=coverage"</argLine>-->
+            <!--                    <disableXmlReport>false</disableXmlReport>-->
+            <!--                    <systemPropertyVariables>-->
+            <!--                        <coverage-output>html</coverage-output>-->
+            <!--                        <coverage-outputDir>${project.build.directory}/codecoverage-output</coverage-outputDir>-->
+            <!--                        <coverage-metrics>all</coverage-metrics>-->
+            <!--                    </systemPropertyVariables>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 </project>

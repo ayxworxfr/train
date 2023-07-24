@@ -1,9 +1,11 @@
 package com.evildoer.train.utils;
 
 /**
- * @author: evildoer
- * @date: 2023/7/22
- * @description:
+ * Log
+ *
+ * @author evildoer
+ * @date 2023/7/22
+ * @version v1.0
  */
 public class Log {
     /**
