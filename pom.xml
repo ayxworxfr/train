@@ -178,12 +178,13 @@
                 </configuration>
             </plugin>
             <!-- powermock适配jdk17-->
-<!--            <plugin>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <argLine>&#45;&#45;add-opens java.base/java.lang=ALL-UNNAMED</argLine>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <artifactId>maven-surefire-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <argLine>&#45;&#45;add-opens java.base/java.lang=ALL-UNNAMED</argLine>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+
 
             <!--            <plugin>-->
             <!--                <artifactId>maven-surefire-plugin</artifactId>-->

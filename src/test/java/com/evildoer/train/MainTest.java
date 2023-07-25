@@ -1,12 +1,12 @@
 package com.evildoer.train;
 
 import com.evildoer.train.utils.Log;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class MainTest {
 
     @Test
-    void test() {
+    public void test() {
         Log.print(removeDuplicateLetters("cbacdcbc"));
         // 下一位小于等于我或我是首位且下一位为0(连续删0)
 
