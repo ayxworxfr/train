@@ -1,4 +1,4 @@
 package com.evildoer.train;
 
-public class Main {
+public class Solution {
 }

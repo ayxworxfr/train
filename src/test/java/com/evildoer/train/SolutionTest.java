@@ -1,9 +1,12 @@
 package com.evildoer.train;
 
 import com.evildoer.train.utils.Log;
+import mockit.Tested;
 import org.junit.Test;
 
-public class MainTest {
+public class SolutionTest {
+    @Tested
+    private Solution solution;
 
     @Test
     public void test() {
