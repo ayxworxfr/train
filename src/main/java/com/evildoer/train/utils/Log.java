@@ -14,18 +14,19 @@ public class Log {
      * @param pattern 输出内容
      * @param args 参数
      */
-    public static void print(String pattern, Object... args) {
+    public static void print(Object pattern, Object... args) {
+        String result = pattern.toString();
         StringBuilder builder = new StringBuilder();
         int start = 0;
         for (Object arg : args) {
-            int j = pattern.indexOf("{}", start);
+            int j = result.indexOf("{}", start);
             if (j == -1) {
                 break;
             }
-            builder.append(pattern, start, j).append(arg.toString());
+            builder.append(result, start, j).append(arg.toString());
             start = j + 2;
         }
-        builder.append(pattern.substring(start));
+        builder.append(result.substring(start));
 
         System.out.println(builder);
     }
